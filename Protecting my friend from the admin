@@ -1,0 +1,550 @@
+
+local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local starterGui = game:GetService("StarterGui")
+local workspace = game:GetService("Workspace")
+local coreGui = game:GetService("CoreGui")
+local runService = game:GetService("RunService")
+local name = game.Players.LocalPlayer.Name
+local function f1()
+    local v1, v2 = pcall(function()
+        return game:HttpGet("https://raw.githubusercontent.com/amroffaads/user/refs/heads/main/%D8%AD%D9%85%D8%A7%D9%8A%D8%AA%20%D8%B5%D8%AF%D9%8A%D9%82%D9%83")
+    end
+)
+    if v1 then
+        local v3 = {
+        }
+        for match in string.gmatch(v2, "([^\n\r]+)") do
+            local gsub = match:gsub("^%s+", ""):gsub("%s+$", "")
+            if gsub ~= "" then
+                v3[gsub] =  true
+            end
+        end
+        return v3
+    end
+    warn("Hulm Security: فشل في جلب القائمة البيضاء من الرابط")
+    return {
+    }
+end
+local f2, f3, f4, f5, f6, f7, f8, f9, localPlayer, v4, v5, v6, v7, frame, textBox, v8, f10, f11, f12, f13
+if not f1()[name] then
+    warn("Hulm Security: المستخدم "..name.. " غير مصرح له.")
+    return
+else
+    print("Hulm System: تم التحقق بنجاح.. أهلاً بك "..name)
+    localPlayer = players.LocalPlayer
+    v4 = {
+        AntiCuff = {
+            Active =  false,
+            Target =  nil,
+            LastReTime = 0,
+            Cooldown = 1,
+        },
+        AntiCopyFree = {
+            Active =  false,
+            Target =  nil,
+            IsResetting =  false,
+            CharacterTime = 0,
+        },
+        AntiCopyAdmin = {
+            Active =  false,
+            Target =  nil,
+            IsResetting =  false,
+            LastReTime = 0,
+            Cooldown = 1,
+        },
+        AntiDance = {
+            Active =  false,
+            Target =  nil,
+            LastExecTime = 0,
+            Cooldown = 0,
+        },
+    }
+    v5 = {
+        HDAdminStarterCharacter =  true,
+        HDAdminFlyForce =  true,
+        HDAdminFlyGyro =  true,
+        AnimationTrack =  true,
+        Animation1 =  true,
+        Animation2 =  true,
+        Animation3 =  true,
+        Animation4 =  true,
+        Animation5 =  true,
+        Animation6 =  true,
+        Animation7 =  true,
+        Animation8 =  true,
+    }
+    v6 = {
+        Accessory =  true,
+        Shirt =  true,
+        Pants =  true,
+        BodyColors =  true,
+        ShirtGraphic =  true,
+        Tool =  true,
+        Humanoid =  true,
+        NumberValue =  true,
+        Folder =  true,
+        BillboardGui =  true,
+        SurfaceGui =  true,
+        Decal =  true,
+    }
+    v7 = {
+        "incuffingsession",
+        "incuff",
+        "cuffingsession",
+        "admincuff",
+        "handcufftool",
+        "arresttool",
+        "restraint",
+        "restrained",
+        "handcuffs",
+        "cuff",
+    }
+    local protectionSystem4 = Instance.new("ScreenGui")
+    protectionSystem4.Name = "ProtectionSystem4"
+    protectionSystem4.Parent = coreGui
+    protectionSystem4.ResetOnSpawn =  false
+    frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 220, 0, 280)
+    frame.Position = UDim2.new(0.5,  - 110, 0.3, 0)
+    frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    frame.Active =  true
+    frame.Draggable =  true
+    frame.Parent = protectionSystem4
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Text = "🛡️ الحماية (4 أنظمة)"
+    textLabel.Size = UDim2.new(1,  - 20, 0, 35)
+    textLabel.Position = UDim2.new(0, 10, 0, 5)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.Font = Enum.Font.SourceSansBold
+    textLabel.TextSize = 16
+    textLabel.Parent = frame
+    textBox = Instance.new("TextBox")
+    textBox.Size = UDim2.new(1,  - 20, 0, 35)
+    textBox.Position = UDim2.new(0, 10, 0, 45)
+    textBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    textBox.TextColor3 = Color3.new(1, 1, 1)
+    textBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+    textBox.PlaceholderText = "اسم اللاعب"
+    textBox.Font = Enum.Font.SourceSans
+    textBox.TextSize = 14
+    textBox.Text = ""
+    Instance.new("UICorner", textBox).CornerRadius = UDim.new(0, 6)
+    textBox.Parent = frame
+    local function f14(p1, text, p2)
+        local frame2 = Instance.new("Frame")
+        frame2.Size = UDim2.new(1,  - 20, 0, 38)
+        frame2.Position = UDim2.new(0, 10, 0, p1)
+        frame2.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        frame2.Parent = frame
+        Instance.new("UICorner", frame2).CornerRadius = UDim.new(0, 8)
+        local textLabel2 = Instance.new("TextLabel")
+        textLabel2.Text = text
+        textLabel2.Size = UDim2.new(0, 120, 1, 0)
+        textLabel2.Position = UDim2.new(0, 10, 0, 0)
+        textLabel2.BackgroundTransparency = 1
+        textLabel2.TextColor3 = p2 or Color3.new(1, 1, 1)
+        textLabel2.Font = Enum.Font.SourceSansBold
+        textLabel2.TextSize = 13
+        textLabel2.TextXAlignment = Enum.TextXAlignment.Right
+        textLabel2.Parent = frame2
+        local textButton = Instance.new("TextButton")
+        textButton.Text = "OFF"
+        textButton.Size = UDim2.new(0, 55, 0, 28)
+        textButton.Position = UDim2.new(1,  - 65, 0.5,  - 14)
+        textButton.BackgroundColor3 = Color3.fromRGB(192, 57, 43)
+        textButton.TextColor3 = Color3.new(1, 1, 1)
+        textButton.Font = Enum.Font.SourceSansBold
+        textButton.TextSize = 13
+        Instance.new("UICorner", textButton).CornerRadius = UDim.new(0, 6)
+        textButton.Parent = frame2
+        return {
+            Frame = frame2,
+            Btn = textButton,
+            Label = textLabel2
+        }
+    end
+    local antiCuff = f14(90, "🔗 مضاد كلبش (re)", Color3.fromRGB(255, 150, 150))
+    local antiCopyFree = f14(135, "🆓 مضاد نسخ (مجاني)", Color3.fromRGB(100, 255, 100))
+    local antiCopyAdmin = f14(180, "📋 مضاد نسخ (ادمن)", Color3.fromRGB(100, 200, 255))
+    local antiDance = f14(225, "💃 مضاد رقص (ادمن)", Color3.fromRGB(255, 170, 0))
+    function f2(p3)
+        if not p3 or p3 == "" then
+            return nil
+        else
+            local lower = p3:lower()
+            for index, value in ipairs(players:GetPlayers()) do
+                if value ~= localPlayer then
+                    if value.Name:lower():sub(1,  # lower) == lower or value.DisplayName:lower():sub(1,  # lower) == lower then
+                        return value
+                    end
+                end
+            end
+            return nil
+        end
+    end
+    function f3(p4)
+        if not p4 or not p4.Character then
+            return false
+        end
+        for key, value2 in pairs(p4.Character:GetChildren()) do
+            local lower2 = value2.Name:lower()
+            for index2, value3 in ipairs(v7) do
+                if lower2 == value3 or value2:IsA("Tool") and lower2:find(value3) then
+                    return true
+                end
+            end
+        end
+        return false
+    end
+    v8 = {
+        AntiCuff = antiCuff,
+        AntiCopyFree = antiCopyFree,
+        AntiCopyAdmin = antiCopyAdmin,
+        AntiDance = antiDance,
+    }
+    function f4()
+        local target = v4.AntiCopyFree.Target
+        if v4.AntiCopyFree.IsResetting or not target or not v4.AntiCopyFree.Active then
+            return
+        end
+        v4.AntiCopyFree.IsResetting =  true
+        starterGui:SetCore("SendNotification", {
+            Title = "🆓 مضاد نسخ مجاني",
+            Text = "تطهير "..target.Name,
+            Duration = 1,
+        }
+)
+        f10("char "..target.Name.. " 1")
+        task.wait(1)
+        f10("unchar "..target.Name)
+        task.wait(0.5)
+        v4.AntiCopyFree.IsResetting =  false
+    end
+    function f5()
+        local target2 = v4.AntiCuff.Target
+        if not target2 or not v4.AntiCuff.Active then
+            return
+        else
+            local v9 = os.clock()
+            if v9 - v4.AntiCuff.LastReTime < v4.AntiCuff.Cooldown then
+                return
+            end
+            v4.AntiCuff.LastReTime = v9
+            starterGui:SetCore("SendNotification", {
+                Title = "🔗 مضاد كلبش",
+                Text = ".re "..target2.Name,
+                Duration = 1,
+            }
+)
+            f10("re "..target2.Name)
+            return
+        end
+    end
+    function f10(p5)
+        task.spawn(function()
+            local requestCommandSilent = replicatedStorage:FindFirstChild("HDAdminHDClient") and replicatedStorage.HDAdminHDClient:FindFirstChild("Signals") and replicatedStorage.HDAdminHDClient.Signals:FindFirstChild("RequestCommandSilent")
+            if requestCommandSilent then
+                requestCommandSilent:InvokeServer("."..p5)
+            else
+                local sayMessageRequest = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents") and replicatedStorage.DefaultChatSystemChatEvents:FindFirstChild("SayMessageRequest")
+                if sayMessageRequest then
+                    sayMessageRequest:FireServer("."..p5, "All")
+                end
+            end
+        end
+)
+    end
+    function f6(p6)
+        if not p6:IsA("Animation") then
+            return false
+        end
+        if v5[p6.Name] then
+            return false
+        end
+        local lower3
+        if p6.Name:match("^HD%-%d+$") then
+            local v10 = p6.Name:match("%d+")
+            if v10 and # v10 >= 10 then
+                return true
+            end
+            lower3 = p6.Name:lower()
+            for index3, value4 in ipairs({
+                "dance",
+                "رقص",
+                "dancing",
+                "move",
+                "حركة",
+                "animation",
+            }
+) do
+                if lower3:find(value4) then
+                    return true
+                end
+            end
+            return false
+        end
+        lower3 = p6.Name:lower()
+        for index4, value5 in ipairs({
+            "dance",
+            "رقص",
+            "dancing",
+            "move",
+            "حركة",
+            "animation",
+        }
+) do
+            if lower3:find(value5) then
+                return true
+            end
+        end
+        return false
+    end
+    function f9(p7)
+        if not p7 or not v4.AntiCopyFree.Active then
+            return
+        end
+        local v11 = os.clock()
+        p7.ChildAdded:Connect(function(child)
+            if not v4.AntiCopyFree.Active or v4.AntiCopyFree.IsResetting then
+                return
+            elseif os.clock() - v11 < 0.3 then
+                return
+            elseif v6[child.ClassName] or child:IsA("Accessory") then
+                return
+            else
+                local lower4 = child.Name:lower()
+                if lower4:match("head") or lower4:match("torso") or lower4:match("leg") or lower4:match("arm") then
+                    return
+                end
+                if child:IsA("Model") or child:IsA("Part") or child:IsA("MeshPart") then
+                    f4()
+                end
+                return
+            end
+        end
+)
+    end
+    function f7()
+        local target3 = v4.AntiDance.Target
+        if not target3 or not v4.AntiDance.Active then
+            return
+        else
+            local v12 = os.clock()
+            if v12 - v4.AntiDance.LastExecTime < v4.AntiDance.Cooldown then
+                return
+            end
+            v4.AntiDance.LastExecTime = v12
+            f10("undog "..target3.Name)
+            return
+        end
+    end
+    function f8(p8)
+        if not p8 or not v4.AntiCopyAdmin.Active then
+            return
+        end
+        local v13 = os.clock()
+        p8.ChildAdded:Connect(function(child2)
+            if not v4.AntiCopyAdmin.Active or v4.AntiCopyAdmin.IsResetting then
+                return
+            elseif os.clock() - v13 < 0.3 then
+                return
+            elseif v6[child2.ClassName] or child2:IsA("Accessory") then
+                return
+            else
+                local lower5 = child2.Name:lower()
+                if lower5:match("head") or lower5:match("torso") or lower5:match("leg") or lower5:match("arm") or lower5:match("root") or lower5:match("hd") then
+                    return
+                end
+                if child2:IsA("Model") or child2:IsA("Part") or child2:IsA("MeshPart") then
+                    f11()
+                end
+                return
+            end
+        end
+)
+    end
+    function f11()
+        local target4 = v4.AntiCopyAdmin.Target
+        if v4.AntiCopyAdmin.IsResetting or not target4 or not v4.AntiCopyAdmin.Active then
+            return
+        else
+            local v14 = os.clock()
+            if v14 - v4.AntiCopyAdmin.LastReTime < v4.AntiCopyAdmin.Cooldown then
+                return
+            end
+            v4.AntiCopyAdmin.LastReTime = v14
+            v4.AntiCopyAdmin.IsResetting =  true
+            starterGui:SetCore("SendNotification", {
+                Title = "📋 مضاد نسخ ادمن",
+                Text = ".re "..target4.Name,
+                Duration = 1,
+            }
+)
+            pcall(function()
+                if target4.Character and target4.Character:FindFirstChild("HumanoidRootPart") then
+                    target4.Character.HumanoidRootPart.Anchored =  true
+                end
+            end
+)
+            task.wait(0.2)
+            f10("re "..target4.Name)
+            task.wait(1)
+            v4.AntiCopyAdmin.IsResetting =  false
+            pcall(function()
+                if target4.Character and target4.Character:FindFirstChild("HumanoidRootPart") then
+                    target4.Character.HumanoidRootPart.Anchored =  false
+                end
+            end
+)
+            return
+        end
+    end
+    function f12(p9)
+        if not p9 or not v4.AntiDance.Active then
+            return
+        end
+        p9.DescendantAdded:Connect(function(descendant)
+            if not v4.AntiDance.Active then
+                return
+            elseif descendant:IsA("Tool") then
+                return
+            else
+                if descendant:IsA("Animation") and f6(descendant) then
+                    task.wait(0)
+                    f7()
+                end
+                return
+            end
+        end
+)
+    end
+    function f13(p10, p11, p12)
+        if p10.Active then
+            p10.Active =  false
+            p10.Target =  nil
+            p11.Text = "OFF"
+            p11.BackgroundColor3 = Color3.fromRGB(192, 57, 43)
+            starterGui:SetCore("SendNotification", {
+                Title = "⏹️ "..p12,
+                Text = "تم الإيقاف",
+                Duration = 2,
+            }
+)
+        else
+            local text2 = textBox.Text
+            if text2 and text2 ~= "" then
+                local v15 = f2(text2)
+                if v15 then
+                    p10.Active =  true
+                    p10.Target = v15
+                    p11.Text = "ON: "..v15.Name
+                    p11.BackgroundColor3 = Color3.fromRGB(39, 174, 96)
+                    if v15.Character then
+                        if p12 == "مضاد نسخ مجاني" then
+                            f9(v15.Character)
+                        elseif p12 == "مضاد نسخ ادمن" then
+                            f8(v15.Character)
+                        elseif p12 == "مضاد رقص ادمن" then
+                            f12(v15.Character)
+                            task.wait(1)
+                            for key2, value6 in pairs(v15.Character:GetDescendants()) do
+                                if value6:IsA("Animation") and f6(value6) then
+                                    f7()
+                                    break
+                                end
+                            end
+                        end
+                    end
+                    starterGui:SetCore("SendNotification", {
+                        Title = "✅ "..p12,
+                        Text = "حماية "..v15.Name,
+                        Duration = 3,
+                    }
+)
+                else
+                    starterGui:SetCore("SendNotification", {
+                        Title = "❌ خطأ",
+                        Text = "لم يتم العثور على اللاعب",
+                        Duration = 2,
+                    }
+)
+                end
+            else
+                starterGui:SetCore("SendNotification", {
+                    Title = "⚠️ تنبيه",
+                    Text = "اكتب اسم اللاعب أولاً",
+                    Duration = 2,
+                }
+)
+            end
+        end
+    end
+    v8.AntiCuff.Btn.MouseButton1Click:Connect(function()
+        f13(v4.AntiCuff, v8.AntiCuff.Btn, "مضاد كلبش")
+    end
+)
+    v8.AntiCopyFree.Btn.MouseButton1Click:Connect(function()
+        f13(v4.AntiCopyFree, v8.AntiCopyFree.Btn, "مضاد نسخ مجاني")
+    end
+)
+    v8.AntiCopyAdmin.Btn.MouseButton1Click:Connect(function()
+        f13(v4.AntiCopyAdmin, v8.AntiCopyAdmin.Btn, "مضاد نسخ ادمن")
+    end
+)
+    v8.AntiDance.Btn.MouseButton1Click:Connect(function()
+        f13(v4.AntiDance, v8.AntiDance.Btn, "مضاد رقص ادمن")
+    end
+)
+    runService.Heartbeat:Connect(function()
+        if v4.AntiCuff.Active and v4.AntiCuff.Target and f3(v4.AntiCuff.Target) then
+            f5()
+        end
+    end
+)
+    local function f15(p13)
+        p13.CharacterAdded:Connect(function(character)
+            task.wait(0.5)
+            if v4.AntiCopyFree.Active and v4.AntiCopyFree.Target == p13 then
+                f9(character)
+            end
+            if v4.AntiCopyAdmin.Active and v4.AntiCopyAdmin.Target == p13 then
+                f8(character)
+            end
+            if v4.AntiDance.Active and v4.AntiDance.Target == p13 then
+                f12(character)
+            end
+        end
+)
+    end
+    for index5, value7 in ipairs(players:GetPlayers()) do
+        f15(value7)
+    end
+    players.PlayerAdded:Connect(f15)
+    players.PlayerRemoving:Connect(function(player)
+        for key3, value8 in pairs(v4) do
+            if value8.Target == player then
+                value8.Active =  false
+                value8.Target =  nil
+            end
+        end
+        for key4, value9 in pairs(v8) do
+            if value9.Btn.Text:find(player.Name) then
+                value9.Btn.Text = "OFF"
+                value9.Btn.BackgroundColor3 = Color3.fromRGB(192, 57, 43)
+            end
+        end
+    end
+)
+    task.wait(1)
+    starterGui:SetCore("SendNotification", {
+        Title = "🛡️ نظام الحماية (4 أنظمة)",
+        Text = "تم التحقق - أهلاً بك "..name,
+        Duration = 3,
+    }
+)
+    print(" \n✅ نظام الحماية (4 أنظمة) جاهز!\n📌 الأنظمة:\n   1. مضاد كلبش (re)\n   2. مضاد نسخ مجاني (char/unchar)\n   3. مضاد نسخ ادمن (re)\n   4. مضاد رقص ادمن (undog)\n")
+    return
+end
