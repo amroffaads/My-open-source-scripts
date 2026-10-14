@@ -1,0 +1,199 @@
+
+local players = game:GetService("Players")
+local runService = game:GetService("RunService")
+local workspace = game:GetService("Workspace")
+local userInputService = game:GetService("UserInputService")
+local name = game.Players.LocalPlayer.Name
+local function f1()
+    local v1, v2 = pcall(function()
+        return game:HttpGet("https://raw.githubusercontent.com/amroffaads/user/refs/heads/main/%D8%B3%D9%83%D8%B1%D8%A8%D8%AA%20%D8%AA%D8%B7%D9%8A%D8%B1%20%D9%85%D8%B3%D8%AF%D8%B3")
+    end
+)
+    if v1 then
+        local v3 = {
+        }
+        for match in string.gmatch(v2, "([^\n\r]+)") do
+            v3[match] =  true
+        end
+        return v3
+    end
+    warn("Hulm Security: فشل في جلب القائمة البيضاء من الرابط")
+    return {
+    }
+end
+local f2, localPlayer, v4, v5, cameraAnchor, cameraSubject, v6, v7, instance, instance2, f3
+if not f1()[name] then
+    warn("Hulm Security: المستخدم "..name.. " غير مصرح له.")
+    return
+else
+    print("Hulm System: تم التحقق بنجاح.. أهلاً بك "..name)
+    localPlayer = players.LocalPlayer
+    getgenv().AttackSystem = {
+        TOOL_NAME = "فلوس بات مان",
+        Desync =  true,
+        Direction = Vector3.new(0,
+        0,
+        -         3),
+    }
+    v4 =  false
+    v5 =  false
+    cameraAnchor =  nil
+    cameraSubject =  nil
+    v6 = 0
+    v7 =  nil
+    local v8 = game
+    local instance3 = Instance.new("ScreenGui", v8:GetService("CoreGui"))
+    local instance4 = Instance.new("Frame", instance3)
+    instance4.Size = UDim2.new(0, 250, 0, 150)
+    instance4.Position = UDim2.new(0.5,  - 125, 0.5,  - 75)
+    instance4.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    instance4.Active =  true
+    instance4.Draggable =  true
+    local instance5 = Instance.new("TextLabel", instance4)
+    instance5.Size = UDim2.new(1, 0, 0, 30)
+    instance5.Text = "PRIME ATTACK SYSTEM V2"
+    instance5.TextColor3 = Color3.new(1, 1, 1)
+    instance5.BackgroundTransparency = 1
+    instance = Instance.new("TextBox", instance4)
+    instance.Size = UDim2.new(0, 200, 0, 30)
+    instance.Position = UDim2.new(0.5,  - 100, 0, 40)
+    instance.PlaceholderText = "اسم الضحية..."
+    local instance6 = Instance.new("TextButton", instance4)
+    instance6.Size = UDim2.new(0, 200, 0, 30)
+    instance6.Position = UDim2.new(0.5,  - 100, 0, 80)
+    instance6.Text = "هجوم مؤقت (4 ثواني)"
+    instance6.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+    instance6.TextColor3 = Color3.new(1, 1, 1)
+    instance2 = Instance.new("TextButton", instance4)
+    instance2.Size = UDim2.new(0, 200, 0, 30)
+    instance2.Position = UDim2.new(0.5,  - 100, 0, 120)
+    instance2.Text = "▶ هجوم مستمر (متوقف)"
+    instance2.BackgroundColor3 = Color3.fromRGB(0, 100, 0)
+    local color = Color3.new(1, 1, 1)
+    function f2(p1)
+        for key, value in pairs(players:GetPlayers()) do
+            if value ~= localPlayer and(value.Name:lower():find(p1:lower()) or value.DisplayName:lower():find(p1:lower())) then
+                return value
+            end
+        end
+        return nil
+    end
+    instance2.TextColor3 = color
+    function f3()
+        v4 =  false
+        v5 =  false
+        v7 =  nil
+        task.wait(0.05)
+        if cameraAnchor then
+            if cameraSubject and cameraSubject.Parent then
+                workspace.CurrentCamera.CameraSubject = cameraSubject
+            else
+                local character = localPlayer.Character
+                workspace.CurrentCamera.CameraSubject = character:FindFirstChildOfClass("Humanoid")
+            end
+            cameraAnchor:Destroy()
+            cameraAnchor =  nil
+        end
+        instance2.Text = "▶ هجوم مستمر (متوقف)"
+        instance2.BackgroundColor3 = Color3.fromRGB(0, 100, 0)
+    end
+    instance6.MouseButton1Click:Connect(function()
+        local v9 = f2(instance.Text)
+        if v9 and v9.Character and v9.Character:FindFirstChild("HumanoidRootPart") then
+            v7 = v9
+            local findFirstChild = localPlayer.Backpack:FindFirstChild(getgenv().AttackSystem.TOOL_NAME) or localPlayer.Character:FindFirstChild(getgenv().AttackSystem.TOOL_NAME)
+            if findFirstChild then
+                localPlayer.Character.Humanoid:EquipTool(findFirstChild)
+            end
+            v4 =  true
+            v5 =  false
+            task.delay(4, function()
+                if v4 and not v5 then
+                    f3()
+                end
+            end
+)
+        end
+    end
+)
+    instance2.MouseButton1Click:Connect(function()
+        if not v4 then
+            local v10 = f2(instance.Text)
+            if v10 and v10.Character and v10.Character:FindFirstChild("HumanoidRootPart") then
+                v7 = v10
+                local findFirstChild2 = localPlayer.Backpack:FindFirstChild(getgenv().AttackSystem.TOOL_NAME) or localPlayer.Character:FindFirstChild(getgenv().AttackSystem.TOOL_NAME)
+                if findFirstChild2 then
+                    localPlayer.Character.Humanoid:EquipTool(findFirstChild2)
+                end
+                v4 =  true
+                v5 =  true
+                instance2.Text = "⏸ هجوم مستمر (شغال)"
+                instance2.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+            end
+        else
+            f3()
+        end
+    end
+)
+    runService.Heartbeat:Connect(function()
+        if v4 and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local humanoidRootPart = localPlayer.Character.HumanoidRootPart
+            local findFirstChild3 = localPlayer.Character:FindFirstChild(getgenv().AttackSystem.TOOL_NAME)
+            local cframe = humanoidRootPart.CFrame
+            if not cameraAnchor then
+                cameraAnchor = Instance.new("Part")
+                cameraAnchor.Name = "CameraAnchor"
+                cameraAnchor.Anchored =  true
+                cameraAnchor.Transparency = 1
+                cameraAnchor.CanCollide =  false
+                cameraAnchor.Parent = workspace
+                cameraSubject = workspace.CurrentCamera.CameraSubject
+                workspace.CurrentCamera.CameraSubject = cameraAnchor
+            end
+            if cameraAnchor then
+                cameraAnchor.CFrame = cframe * CFrame.new(0, 1.5, 0)
+            end
+            if v7 and v7.Character and v7.Character:FindFirstChild("HumanoidRootPart") then
+                local humanoidRootPart2 = v7.Character.HumanoidRootPart
+                local character2 = v7.Character
+                local v11 = humanoidRootPart2.Position + humanoidRootPart2.Velocity * 0.6
+                local v12 =  -(character2:GetExtentsSize().Y * 0.3)
+                local magnitude = 0.7
+                if findFirstChild3 and findFirstChild3:FindFirstChild("Handle") then
+                    magnitude =(humanoidRootPart.Position - findFirstChild3.Handle.Position).Magnitude
+                end
+                local v13 = magnitude * 1
+                v6 = v6 + 30
+                local v14 = math.cos(math.rad(v6))
+                local v15 = math.sin(math.rad(v6))
+                local vector = Vector3.new(v14 * v13, v12, v15 * v13)
+                local cframe2 = CFrame.new(v11 + vector, v11) * CFrame.Angles(0, math.rad(70), 0)
+                if getgenv().AttackSystem.Desync ==  true then
+                    local velocity = humanoidRootPart.Velocity
+                    humanoidRootPart.CFrame = cframe2
+                    humanoidRootPart.Velocity = getgenv().AttackSystem.Direction * 1.2676506002282e+30
+                    runService.RenderStepped:Wait()
+                    if humanoidRootPart and humanoidRootPart.Parent then
+                        humanoidRootPart.Velocity = velocity
+                        humanoidRootPart.CFrame = cframe
+                    end
+                else
+                    humanoidRootPart.CFrame = cframe2
+                    runService.RenderStepped:Wait()
+                    if humanoidRootPart and humanoidRootPart.Parent then
+                        humanoidRootPart.CFrame = cframe
+                    end
+                end
+            end
+        end
+    end
+)
+    userInputService.InputBegan:Connect(function(input)
+        if input.KeyCode == Enum.KeyCode.Escape then
+            f3()
+        end
+    end
+)
+    print("✅ سكربت نظام الهجوم جاهز (بمتغيرات خاصة)")
+    return
+end
