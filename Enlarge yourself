@@ -1,0 +1,278 @@
+
+local coreGui = game:GetService("CoreGui")
+local localPlayer = game.Players.LocalPlayer
+local name = localPlayer.Name
+local function f1(p1)
+    local v1, v2 = pcall(function()
+        return game:HttpGet(p1)
+    end
+)
+    if v1 then
+        local v3 = {
+        }
+        for match in string.gmatch(v2, "([^\n\r]+)") do
+            local gsub = match:gsub("^%s+", ""):gsub("%s+$", "")
+            if gsub ~= "" then
+                v3[gsub] =  true
+            end
+        end
+        return v3
+    end
+    return {
+    }
+end
+local v4 = {
+}
+for index, value in ipairs({
+    {
+        name = "حجم",
+        url = "https://raw.githubusercontent.com/amroffaads/user/refs/heads/main/%D8%AD%D8%AC%D9%85",
+        permission = "size",
+    },
+}
+) do
+    if f1(value.url)[name] then
+        table.insert(v4, value.permission)
+    end
+    task.wait(0.1)
+end
+if # v4 == 0 then
+    return
+end
+local f2, f3, f4, v5, replicatedStorage, character, humanoid, v6, v7, instance, instance2, f5, instance3, v8, position, position2
+if table.find(v4, "size") then
+    function missing(p2, p3, p4)
+        if type(p3) == p2 then
+            return p3
+        end
+        return p4
+    end
+    cloneref = missing("function", cloneref, function(...)
+        return...
+    end
+)
+    v5 = setmetatable({
+    }, {
+        __index = function(object,
+        key)
+            return cloneref(game:GetService(key))
+        end
+,
+    }
+)
+    replicatedStorage = v5.ReplicatedStorage
+    local userInputService = v5.UserInputService
+    character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+    humanoid = character:WaitForChild("Humanoid")
+    localPlayer.CharacterAdded:Connect(function(character2)
+        character = character2
+        humanoid = character:WaitForChild("Humanoid")
+    end
+)
+    v6 = {
+        Weight = 0.55,
+        ["Time Position"] = 0
+    }
+    v7 =  nil
+    local eliteEmoteUI = Instance.new("ScreenGui")
+    eliteEmoteUI.Name = "EliteEmoteUI"
+    eliteEmoteUI.ResetOnSpawn =  false
+    eliteEmoteUI.Parent = gethui and gethui() or coreGui or localPlayer:WaitForChild("PlayerGui")
+    instance = Instance.new("Frame", eliteEmoteUI)
+    instance.Size = UDim2.new(0, 280, 0, 240)
+    instance.Position = UDim2.new(0.5, 0, 0.5, 0)
+    instance.AnchorPoint = Vector2.new(0.5, 0.5)
+    instance.BackgroundColor3 = Color3.fromRGB(10, 20, 30)
+    instance.BorderSizePixel = 0
+    instance.Active =  true
+    instance.Draggable =  false
+    Instance.new("UICorner", instance).CornerRadius = UDim.new(0, 12)
+    local instance4 = Instance.new("UIStroke", instance)
+    instance4.Color = Color3.fromRGB(0, 170, 255)
+    instance4.Thickness = 1.5
+    local instance5 = Instance.new("Frame", instance)
+    instance5.Size = UDim2.new(1, 0, 0, 40)
+    instance5.BackgroundColor3 = Color3.fromRGB(0, 40, 70)
+    instance5.Active =  true
+    Instance.new("UICorner", instance5)
+    local instance6 = Instance.new("TextLabel", instance5)
+    instance6.Size = UDim2.new(1,  - 40, 1, 0)
+    instance6.Position = UDim2.new(0, 15, 0, 0)
+    instance6.Text = "SIZE PLAYER PRO"
+    instance6.TextColor3 = Color3.fromRGB(0, 200, 255)
+    instance6.Font = Enum.Font.GothamBold
+    instance6.TextSize = 14
+    instance6.BackgroundTransparency = 1
+    instance6.TextXAlignment = Enum.TextXAlignment.Left
+    local instance7 = Instance.new("TextButton", instance5)
+    instance7.Size = UDim2.new(0, 30, 0, 30)
+    instance7.Position = UDim2.new(1,  - 35, 0.5,  - 15)
+    instance7.BackgroundColor3 = Color3.fromRGB(180, 45, 45)
+    instance7.Text = "✕"
+    instance7.TextColor3 = Color3.new(1, 1, 1)
+    instance7.Font = Enum.Font.GothamBold
+    instance7.TextSize = 14
+    Instance.new("UICorner", instance7)
+    instance2 = Instance.new("Frame", instance)
+    instance2.Size = UDim2.new(1,  - 24, 1,  - 55)
+    instance2.Position = UDim2.new(0, 12, 0, 48)
+    instance2.BackgroundTransparency = 1
+    Instance.new("UIListLayout", instance2).Padding = UDim.new(0, 8)
+    local function f6(text, backgroundColor3, p5)
+        local instance8 = Instance.new("TextButton", instance2)
+        instance8.Size = UDim2.new(1, 0, 0, 35)
+        instance8.BackgroundColor3 = backgroundColor3
+        instance8.Text = text
+        instance8.TextColor3 = Color3.new(1, 1, 1)
+        instance8.Font = Enum.Font.GothamBold
+        instance8.TextSize = 13
+        Instance.new("UICorner", instance8)
+        instance8.MouseButton1Click:Connect(p5)
+        return instance8
+    end
+    function f5(p6)
+        task.spawn(function()
+            local signals = replicatedStorage:FindFirstChild("HDAdminHDClient") and replicatedStorage.HDAdminHDClient:FindFirstChild("Signals")
+            local requestCommandSilent = signals and signals:FindFirstChild("RequestCommandSilent")
+            if requestCommandSilent then
+                requestCommandSilent:InvokeServer("."..p6)
+            else
+                local sayMessageRequest = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents") and replicatedStorage.DefaultChatSystemChatEvents:FindFirstChild("SayMessageRequest")
+                if sayMessageRequest then
+                    sayMessageRequest:FireServer("."..p6, "All")
+                end
+            end
+        end
+)
+    end
+    local function f7()
+        if v7 then
+            v7:Stop(0)
+        end
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://93224413172183"
+        pcall(function()
+            local getObjects = game:GetObjects(animation.AnimationId)
+            if getObjects and # getObjects > 0 and getObjects[1]:IsA("Animation") then
+                animation.AnimationId = getObjects[1].AnimationId
+            end
+        end
+)
+        local v9, v10 = pcall(function()
+            return humanoid:LoadAnimation(animation)
+        end
+)
+        if v9 and v10 then
+            v7 = v10
+            v7.Priority = Enum.AnimationPriority.Action4
+            v7:Play(0.1, v6.Weight, 0)
+            v7.TimePosition = v6["Time Position"] * v7.Length
+        end
+    end
+    f6("▶ تغير الحجم", Color3.fromRGB(0, 120, 215), f7)
+    f6("■ إيقاف الحجم", Color3.fromRGB(180, 45, 45), function()
+        if v7 then
+            v7:Stop(0.1)
+        end
+    end
+)
+    f6("👕 وضع السكن المطلوب", Color3.fromRGB(110, 40, 180), function()
+        f5("char me a7mro_123")
+    end
+)
+    local instance9 = Instance.new("Frame", instance2)
+    instance9.Size = UDim2.new(1, 0, 0, 50)
+    instance9.BackgroundColor3 = Color3.fromRGB(20, 35, 50)
+    Instance.new("UICorner", instance9)
+    instance3 = Instance.new("TextBox", instance9)
+    instance3.Size = UDim2.new(0.9, 0, 0, 30)
+    instance3.Position = UDim2.new(0.05, 0, 0.2, 0)
+    instance3.PlaceholderText = "أدخل القيمة (0-99)"
+    instance3.Text = "0"
+    instance3.TextColor3 = Color3.new(1, 1, 1)
+    instance3.Font = Enum.Font.Code
+    instance3.TextSize = 16
+    instance3.BackgroundColor3 = Color3.fromRGB(10, 20, 30)
+    Instance.new("UICorner", instance3)
+    instance3.FocusLost:Connect(function()
+        local v11 = tonumber(instance3.Text)
+        if not v11 then
+            instance3.Text = "0"
+            return
+        else
+            local v12 = math.clamp(v11 / 100, 0, 0.99)
+            v6["Time Position"] = v12
+            instance3.Text = tostring(v11)
+            if v7 and v7.IsPlaying then
+                v7.TimePosition = v12 * v7.Length
+            end
+            return
+        end
+    end
+)
+    function f2(p7)
+        if p7.UserInputType == Enum.UserInputType.MouseButton1 or p7.UserInputType == Enum.UserInputType.Touch then
+            v8 =  true
+            position = p7.Position
+            position2 = instance.Position
+            if p7.UserInputType == Enum.UserInputType.Touch then
+                p7:Capture()
+            end
+        end
+    end
+    v8 =  false
+    function f3(p8)
+        if p8.UserInputType == Enum.UserInputType.MouseButton1 or p8.UserInputType == Enum.UserInputType.Touch then
+            v8 =  false
+            position =  nil
+            position2 =  nil
+        end
+    end
+    position =  nil
+    function f4(p9)
+        if v8 and position and position2 then
+            local v13 = p9.Position - position
+            local getViewportSize = v5.UserInputService:GetViewportSize()
+            local v14 = math.clamp(position2.X.Offset + v13.X, 0, getViewportSize.X - instance.AbsoluteSize.X)
+            local v15 = math.clamp(position2.Y.Offset + v13.Y, 0, getViewportSize.Y - instance.AbsoluteSize.Y)
+            instance.Position = UDim2.new(0, v14, 0, v15)
+        end
+    end
+    position2 =  nil
+    instance5.InputBegan:Connect(function(input)
+        f2(input)
+    end
+)
+    userInputService.InputChanged:Connect(function(input2)
+        if v8 and(input2.UserInputType == Enum.UserInputType.MouseMovement or input2.UserInputType == Enum.UserInputType.Touch) then
+            f4(input2)
+        end
+    end
+)
+    userInputService.InputEnded:Connect(function(input3)
+        f3(input3)
+    end
+)
+    instance5.TouchEnded:Connect(function()
+        v8 =  false
+    end
+)
+    instance7.MouseButton1Click:Connect(function()
+        instance.Visible =  false
+    end
+)
+    instance7.Tap:Connect(function()
+        instance.Visible =  false
+    end
+)
+    userInputService.InputBegan:Connect(function(input4, p10)
+        if not p10 and input4.KeyCode == Enum.KeyCode.C then
+            instance.Visible =  not instance.Visible
+        end
+    end
+)
+    task.wait(0.5)
+    f7()
+else
+    print("⚠️ ليس لديك صلاحية لاستخدام ميزة تغيير الحجم")
+end
